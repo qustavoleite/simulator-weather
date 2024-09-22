@@ -1,65 +1,76 @@
 const exibicaoTemperatura = document.getElementById('temperatura')
-const controleTemperatura = document.getElementById('tempRange')
+const controleTemperatura = document.getElementById('controleTemperatura')
 const aumentarTemp = document.getElementById('aumentar')
 const diminuirTemp = document.getElementById('diminuir')
-const iconeClima = document.querySelector('.display img')
+const container = document.querySelector('.container')
+const iconeTermometro = document.getElementById('iconeTermometro')
 
-let temperatura = parseInt(controleTemperatura.value, 10) // pega o valor inicial do range
+let temperatura = parseInt(controleTemperatura.value, 10)
 
-// função para atualizar o display de temperatura e o ícone
+// Função para atualizar o display de temperatura, fundo e ícone
 function atualizar() {
   exibicaoTemperatura.textContent = `${temperatura}°C`
-  atualizarIconeClima(temperatura) // atualiza o ícone baseado na temperatura
+  atualizarFundo(temperatura)
+  atualizarIconeTermometro(temperatura)
 }
 
-// função para alterar a imagem conforme a temperatura
-function atualizarIconeClima(temp) {
+// Função para alterar o fundo conforme a temperatura
+function atualizarFundo(temp) {
   if (temp <= 0) {
-    iconeClima.src = './img/snow.svg'
-  } else if (temp > 0 && temp <= 15) {
-    iconeClima.src = './img/cloudy.svg'
-  } else if (temp > 15 && temp <= 25) {
-    iconeClima.src = './img/rain.svg'
+    container.style.background = `linear-gradient(to top, #00f, #87CEEB)` // Gradiente azul
+  } else if (temp > 0 && temp <= 25) {
+    container.style.background = `linear-gradient(to top, #fff, #FFD700)` // Gradiente neutro
   } else {
-    iconeClima.src = './img/sunny.svg'
+    container.style.background = `linear-gradient(to top, #f00, #FFA500)` // Gradiente vermelho
   }
 }
 
-// atualiza o valor da temperatura ao arrastar o range
+// Função para alterar o ícone do termômetro conforme a temperatura
+function atualizarIconeTermometro(temp) {
+  if (temp <= 0) {
+    iconeTermometro.src = '/img/thermometer-cold.svg' // Ícone para frio
+  } else if (temp > 0 && temp <= 25) {
+    iconeTermometro.src = '/img/thermometer-neutral.svg' // Ícone para temperatura amena
+  } else {
+    iconeTermometro.src = '/img/thermometer-hot.svg' // Ícone para calor
+  }
+}
+
+// Atualiza o valor da temperatura ao arrastar o range
 controleTemperatura.addEventListener('input', () => {
   temperatura = parseInt(controleTemperatura.value, 10)
   atualizar()
 })
 
-// aumenta a temperatura com o botão
+// Aumenta a temperatura com o botão
 aumentarTemp.addEventListener('click', () => {
   if (temperatura < 40) {
     temperatura += 1
-    controleTemperatura.value = temperatura // atualiza o valor do range também
+    controleTemperatura.value = temperatura
     atualizar()
   }
 })
 
-// diminui a temperatura com o botão
+// Diminui a temperatura com o botão
 diminuirTemp.addEventListener('click', () => {
   if (temperatura > -10) {
     temperatura -= 1
-    controleTemperatura.value = temperatura // atualiza o valor do range também
+    controleTemperatura.value = temperatura
     atualizar()
   }
 })
 
-// eventos de teclado para aumentar/diminuir a temperatura
+// Eventos de teclado para aumentar/diminuir a temperatura
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowRight') {
-    // aumenta a temperatura com a tecla "seta para a direita"
+  if (event.key === 'ArrowUp') {
+    // Aumenta a temperatura com a tecla "Seta para cima"
     if (temperatura < 40) {
       temperatura += 1
       controleTemperatura.value = temperatura
       atualizar()
     }
-  } else if (event.key === 'ArrowLeft') {
-    // diminui a temperatura com a tecla "seta para a esquerda"
+  } else if (event.key === 'ArrowDown') {
+    // Diminui a temperatura com a tecla "Seta para baixo"
     if (temperatura > -10) {
       temperatura -= 1
       controleTemperatura.value = temperatura
@@ -68,5 +79,4 @@ document.addEventListener('keydown', (event) => {
   }
 })
 
-// inicializa a exibição
 atualizar()
