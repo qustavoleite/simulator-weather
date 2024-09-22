@@ -15,13 +15,13 @@ function atualizar() {
 // função para alterar a imagem conforme a temperatura
 function atualizarIconeClima(temp) {
   if (temp <= 0) {
-    iconeClima.src = '/img/snow.svg'
+    iconeClima.src = './img/snow.svg'
   } else if (temp > 0 && temp <= 15) {
-    iconeClima.src = '/img/cloudy.svg'
+    iconeClima.src = './img/cloudy.svg'
   } else if (temp > 15 && temp <= 25) {
-    iconeClima.src = '/img/rain.svg'
+    iconeClima.src = './img/rain.svg'
   } else {
-    iconeClima.src = '/img/sunny.svg'
+    iconeClima.src = './img/sunny.svg'
   }
 }
 
