@@ -17,13 +17,13 @@ function atualizar() {
 function atualizarEstilo(temp) {
   if (temp <= 0) {
     container.style.background = `linear-gradient(to top, #00f, #87CEEB)`
-    iconeTermometro.src = '/img/azul.png'
+    iconeTermometro.src = './img/azul.png'
   } else if (temp > 0 && temp <= 25) {
     container.style.background = `linear-gradient(to top, #fff, #FFD700)`
-    iconeTermometro.src = '/img/laranja.png'
+    iconeTermometro.src = './img/laranja.png'
   } else {
     container.style.background = `linear-gradient(to top, #f00, #FFA500)`
-    iconeTermometro.src = '/img/vermelho.png'
+    iconeTermometro.src = './img/vermelho.png'
   }
 }
 
