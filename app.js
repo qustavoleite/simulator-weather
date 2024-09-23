@@ -5,7 +5,7 @@ const diminuirTemp = document.getElementById('diminuir')
 const container = document.querySelector('.container')
 const iconeTermometro = document.getElementById('iconeTermometro')
 
-let temperatura = parseInt(controleTemperatura.value, 10)
+let temperatura = parseInt(controleTemperatura.value)
 
 // função para atualizar o display de temperatura, fundo e ícone
 function atualizar() {
@@ -29,7 +29,7 @@ function atualizarEstilo(temp) {
 
 // atualiza o valor da temperatura ao arrastar o input range
 controleTemperatura.addEventListener('input', () => {
-  temperatura = parseInt(controleTemperatura.value, 10)
+  temperatura = parseInt(controleTemperatura.value)
   atualizar()
 })
 
