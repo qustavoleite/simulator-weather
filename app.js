@@ -7,42 +7,33 @@ const iconeTermometro = document.getElementById('iconeTermometro')
 
 let temperatura = parseInt(controleTemperatura.value, 10)
 
-// Função para atualizar o display de temperatura, fundo e ícone
+// função para atualizar o display de temperatura, fundo e ícone
 function atualizar() {
   exibicaoTemperatura.textContent = `${temperatura}°C`
-  atualizarFundo(temperatura)
-  atualizarIconeTermometro(temperatura)
+  atualizarEstilo(temperatura)
 }
 
-// Função para alterar o fundo conforme a temperatura
-function atualizarFundo(temp) {
+// função que altera o background e a foto do termometro
+function atualizarEstilo(temp) {
   if (temp <= 0) {
-    container.style.background = `linear-gradient(to top, #00f, #87CEEB)` // Gradiente azul
+    container.style.background = `linear-gradient(to top, #00f, #87CEEB)`
+    iconeTermometro.src = '/img/azul.png'
   } else if (temp > 0 && temp <= 25) {
-    container.style.background = `linear-gradient(to top, #fff, #FFD700)` // Gradiente neutro
+    container.style.background = `linear-gradient(to top, #fff, #FFD700)`
+    iconeTermometro.src = '/img/laranja.png'
   } else {
-    container.style.background = `linear-gradient(to top, #f00, #FFA500)` // Gradiente vermelho
+    container.style.background = `linear-gradient(to top, #f00, #FFA500)`
+    iconeTermometro.src = '/img/vermelho.png'
   }
 }
 
-// Função para alterar o ícone do termômetro conforme a temperatura
-function atualizarIconeTermometro(temp) {
-  if (temp <= 0) {
-    iconeTermometro.src = '/img/thermometer-cold.svg' // Ícone para frio
-  } else if (temp > 0 && temp <= 25) {
-    iconeTermometro.src = '/img/thermometer-neutral.svg' // Ícone para temperatura amena
-  } else {
-    iconeTermometro.src = '/img/thermometer-hot.svg' // Ícone para calor
-  }
-}
-
-// Atualiza o valor da temperatura ao arrastar o range
+// atualiza o valor da temperatura ao arrastar o input range
 controleTemperatura.addEventListener('input', () => {
   temperatura = parseInt(controleTemperatura.value, 10)
   atualizar()
 })
 
-// Aumenta a temperatura com o botão
+// aumenta a temperatura
 aumentarTemp.addEventListener('click', () => {
   if (temperatura < 40) {
     temperatura += 1
@@ -51,7 +42,7 @@ aumentarTemp.addEventListener('click', () => {
   }
 })
 
-// Diminui a temperatura com o botão
+// diminui a temperatura
 diminuirTemp.addEventListener('click', () => {
   if (temperatura > -10) {
     temperatura -= 1
@@ -60,17 +51,15 @@ diminuirTemp.addEventListener('click', () => {
   }
 })
 
-// Eventos de teclado para aumentar/diminuir a temperatura
+// aumentar e diminuir a temperatura no teclado
 document.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowUp') {
-    // Aumenta a temperatura com a tecla "Seta para cima"
     if (temperatura < 40) {
       temperatura += 1
       controleTemperatura.value = temperatura
       atualizar()
     }
   } else if (event.key === 'ArrowDown') {
-    // Diminui a temperatura com a tecla "Seta para baixo"
     if (temperatura > -10) {
       temperatura -= 1
       controleTemperatura.value = temperatura
